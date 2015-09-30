@@ -42,3 +42,17 @@
 (defn *$
   "multiply money by amount"
   [money amount] (->Money (* amount (:amount money)) (:currency money)))
+
+(def zero-dollar (->Money 0 (:usd market-currencies)))
+(def zero-pound (->Money 0 (:gbp market-currencies)))
+(def zero-euro (->Money 0 (:eur market-currencies)))
+(def zero-yen (->Money 0 (:jyp market-currencies)))
+(def zero-dinar (->Money 0 (:kwd market-currencies)))
+
+(defn make-money
+  "constructor for amount and currency, defaults to 0 usd"
+  ([] zero-dollar)
+  ([amount] (make-money amount (:usd market-currencies)))
+  ([amount currency] (->Money amount currency)))
+
+

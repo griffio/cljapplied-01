@@ -4,10 +4,11 @@
             [cljapplied.value.money :refer :all])
   (:import (clojure.lang ExceptionInfo)))
 (deftest two-money-facts-in-a-test
-  (fact "For Money records, you get two constructor factory functions:- positional and map"
+  (fact "For Clojure records, you get two constructor factory functions:- positional and map; make-money is provided too"
         (let [usd100 (->Money 100 (:usd market-currencies))]
           usd100 => (map->Money {:amount 100 :currency (:usd market-currencies)})
-          usd100 =not=> (map->Money {:amount 100 :currency (:jyp market-currencies)})))
+          usd100 =not=> (map->Money {:amount 100 :currency (:jyp market-currencies)})
+          usd100 => (make-money 100 (:usd market-currencies))))
   (fact "equal, addition and multiply operations"
         (let [gbp10 (->Money 10 (:gbp market-currencies)) kwd10 (->Money 10 (:kwd market-currencies))]
           (=$ gbp10) => true
