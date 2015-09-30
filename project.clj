@@ -6,4 +6,5 @@
   :dependencies [[org.clojure/clojure "1.7.0"]
                  [org.clojure/tools.logging "0.3.1"]
                  [ch.qos.logback/logback-classic "1.1.3"]]
-  :profiles {:dev {:dependencies [[midje "1.7.0"]]}})
+  :profiles {:dev {:dependencies [[midje "1.7.0"]]}}
+  :repl-options {:init-ns cljapplied.value.money})
