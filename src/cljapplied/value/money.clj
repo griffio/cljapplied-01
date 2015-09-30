@@ -20,5 +20,25 @@
   [m1 m2]
   (or (= (:currency m1) (:currency m2))
       (throw
-        ex-info "Currencies are not equivalent."
-        {:m1 m1 :m2 m2})))
+        (ex-info "Currencies are not equivalent."
+                 {:m1 m1 :m2 m2}))))
+
+(defn =$
+  "test equivalence currency amount required on all money arguments, otherwise exception"
+  ([_] true)
+  ([m1 m2] (zero? (.compareTo m1 m2)))
+  ([m1 m2 & mn]
+   (every? zero? (map #(.compareTo m1 %) (conj mn m2)))))
+
+(defn +$
+  "sums all equivalent money arguments of same currency, otherwise exception"
+  ([m1] m1)
+  ([m1 m2]
+   (validate-same-currency m1 m2)
+   (->Money (+ (:amount m1) (:amount m2)) (:currency m1)))
+  ([m1 m2 & mn]
+   (reduce +$ m1 (conj mn m2))))
+
+(defn *$
+  "multiply money by amount"
+  [money amount] (->Money (* amount (:amount money)) (:currency money)))
