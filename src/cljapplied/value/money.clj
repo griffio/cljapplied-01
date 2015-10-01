@@ -54,5 +54,3 @@
   ([] zero-dollar)
   ([amount] (make-money amount (:usd market-currencies)))
   ([amount currency] (->Money amount currency)))
-
-
