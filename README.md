@@ -2,6 +2,8 @@
 
 Clojure Applied
 
+https://pragprog.com/book/vmclojeco/clojure-applied
+
 Money Record
 
 ## Usage
