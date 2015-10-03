@@ -1,12 +1,25 @@
 (ns cljapplied.shop
   (:require [cljapplied.value.money :refer [make-money +$ *$]])
   (:import (cljapplied.value.money Money)
-           (java.util UUID)))
+           (java.util UUID)
+           (clojure.lang PersistentQueue)))
 
-(defrecord CatalogItem [number dept desc ^Money price])
-(defrecord Cart [number customer line-items settled?])
-(defrecord LineItem [quantity catalog-item ^Money price])
 (defrecord Customer [cname email membership-number])
+(defrecord CatalogItem [uuid dept desc ^Money price])
+(defrecord LineItem [quantity catalog-item ^Money price])
+(defrecord Cart [id-seq ^Customer customer line-items settled?])
+
+(defonce cart-id-seq (atom 0))
+
+(def new-line-items PersistentQueue/EMPTY)
+
+(defn add-line-item [line-items line-item]
+  (conj line-items line-item))
+
+(defn make-cart
+  [customer line-items settled?]
+  (let [cart-id (swap! cart-id-seq inc)]
+    (->Cart cart-id customer line-items settled?)))
 
 (defn make-line-item
   "Given a catalog-item and quantity make a line item record"
@@ -37,4 +50,4 @@
        (mapcat :line-items)
        (map line-summary)
        (group-by :dept)
-       (reduce-kv 0 dept-total)))
+       (reduce-kv dept-total {})))
