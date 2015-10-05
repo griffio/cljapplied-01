@@ -51,3 +51,13 @@
        (map line-summary)
        (group-by :dept)
        (reduce-kv dept-total {})))
+
+(defn shopping-items
+  "add line-items to shopping"
+  [line-items]
+  (loop [[item & items] line-items
+         shopping new-line-items]
+    (if item
+      (recur items (add-line-item shopping item))
+      shopping))
+  )
