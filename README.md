@@ -20,6 +20,8 @@ Consider adding "lein-midje" to ./lein/profiles.clj for clojure.test
 {:user  :plugins [[lein-midje "3.1.3"]]}
 ~~~
 
+Runs with
+
 ~~~
 lein test
 ~~~
