@@ -4,7 +4,13 @@ Clojure Applied
 
 https://pragprog.com/book/vmclojeco/clojure-applied
 
+---
+
 Money Record
+
+Shopping Cart
+
+Shows how to calculate revenue by department
 
 ## Usage
 
@@ -20,7 +26,7 @@ lein test
 
 ## License
 
-Copyright © 2015 FIXME
+Copyright © 2015
 
 Distributed under the Eclipse Public License either version 1.0 or (at
 your option) any later version.
